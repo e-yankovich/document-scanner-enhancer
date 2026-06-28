@@ -32,7 +32,6 @@ def clean(mask: np.ndarray) -> np.ndarray:
     MIN_AREA = 50
 
     for i in range(1, num_labels):
-
         if stats[i, cv2.CC_STAT_AREA] > MIN_AREA:
             result[labels == i] = 255
 
