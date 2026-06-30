@@ -50,7 +50,8 @@ document-scanner-enhancer/
 │   ├── clean.py
 │   ├── detect.py
 │   └── decide.py
-├── pipeline.py        # runs all five stages on every image in data/
+├── pipeline.py        # batch CLI: runs all five stages on every image in data/
+├── app.py             # web UI (Flask): upload a photo, see all stages
 ├── report/            # project report
 ├── requirements.txt
 └── README.md
@@ -78,6 +79,20 @@ above. For each image, `pipeline.py` writes a numbered record to
 | `07_scan.jpg`     | final readable scanner-style output |
 | `decision.txt`    | automatic decision (message, success, corner count) |
 
+## Web interface (interactive demo)
+
+Instead of the batch CLI you can run a small local web app:
+
+```bash
+python app.py
+```
+
+Open **http://127.0.0.1:5001** in a browser, drag in (or pick) a document photo,
+and the page shows the automatic decision, a **before / after** view (input vs
+final scan) and every processing stage (enhance → segment → clean → detect →
+perspective). Uploaded files and per-run results are written under `static/`
+(git-ignored). Built with Flask; no production server required for the demo.
+
 ## Assumptions
 
 Works best on a single, mostly flat document that is **brighter** than a
@@ -86,7 +101,7 @@ known limitations.
 
 ## Team
 
-| Member             | Role                              | Stages |
-|--------------------|-----------------------------------|--------|
-| Volha Platnitskaya | Image Processing & Morphology     | Enhance, Segment, Clean |
-| Evgeniya Yankovich | Lead CV Engineer (integration)    | Detect, Decide, Pipeline |
+| Member             | Role                              | Stages                                   |
+|--------------------|-----------------------------------|------------------------------------------|
+| Volha Platnitskaya | Image Processing & Morphology     | Enhance, Segment, Clean, Report, Web app |
+| Evgeniya Yankovich | Lead CV Engineer (integration)    | Detect, Decide, Pipeline, Report, Web app|

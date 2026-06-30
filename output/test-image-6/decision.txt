@@ -1,0 +1,3 @@
+Document successfully scanned
+success: True
+corners: 4

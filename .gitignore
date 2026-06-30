@@ -17,3 +17,7 @@ env/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Web app (uploaded images and per-run results)
+static/uploads/
+static/results/
