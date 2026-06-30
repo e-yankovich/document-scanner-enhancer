@@ -15,7 +15,7 @@ def enhance_readability(warped: np.ndarray) -> np.ndarray:
 
     gray = cv2.medianBlur(gray, 3)
 
-    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+    clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(4, 4))
     gray = clahe.apply(gray)
 
     scan = cv2.adaptiveThreshold(
@@ -23,11 +23,9 @@ def enhance_readability(warped: np.ndarray) -> np.ndarray:
         255,
         cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
         cv2.THRESH_BINARY,
-        31,
-        15
+        21,
+        10
     )
-
-    scan = cv2.medianBlur(scan, 3)
 
     return scan
 
