@@ -5,25 +5,16 @@ import numpy as np
 def segment(image: np.ndarray) -> np.ndarray:
     """
     Stage 2:
-    Segment the document.
+    Segment the document from the background with Otsu thresholding.
     """
 
-    adaptive = cv2.adaptiveThreshold(
-        image,
+    blurred = cv2.GaussianBlur(image, (7, 7), 0)
+
+    _, mask = cv2.threshold(
+        blurred,
+        0,
         255,
-        cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-        cv2.THRESH_BINARY,
-        21,
-        10
-    )
-
-    adaptive = cv2.bitwise_not(adaptive)
-
-    edges = cv2.Canny(image, 50, 150)
-
-    mask = cv2.bitwise_or(
-        adaptive,
-        edges
+        cv2.THRESH_BINARY + cv2.THRESH_OTSU
     )
 
     return mask
